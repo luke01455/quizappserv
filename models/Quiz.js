@@ -1,18 +1,22 @@
 const { model, Schema } = require('mongoose');
 
-const userSchema = new Schema ({
-    maxUsers: Int,
-    userScore: [
+const quizSchema = new Schema ({
+    maxUsers: Number,
+    createdAt: String,
+    usersScores: [
         {
-            score: Int,
+            score: Number,
             username: String
         }
     ],
-    users: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-    }
+    users: [
+        {
+            username: String,
+            password: String,
+            createdAt: String
+        }
+    ]
 
 })
 
-module.exports = model('User', userSchema)
+module.exports = model('Quiz', quizSchema)
