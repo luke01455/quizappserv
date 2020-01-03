@@ -14,6 +14,19 @@ module.exports = gql`
         confirmPassword: String!
         email: String!
     }
+    type Quiz {
+        id: ID!
+        users: [User!]!
+        maxUsers: Int!
+        usersScores: [UserScore!]!
+        userCount: Int!
+    }
+    type UserScore {
+        id: ID!
+        username: String!
+        score: String!
+        quiz: String!
+    }
     type Query {
         getUsers: [User]!
     }
