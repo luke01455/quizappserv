@@ -25,8 +25,9 @@ module.exports = gql`
     type UserScore {
         id: ID!
         username: String!
-        score: String!
+        score: Int!
         quiz: String!
+        createdAt: String!
     }
     type Query {
         getUsers: [User]!
@@ -36,5 +37,6 @@ module.exports = gql`
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
         createQuiz(maxUsers: Int!): Quiz!
+        createScore(quizId: String!, score: Int!): Quiz!
     }
 `

@@ -6,13 +6,13 @@ const quizSchema = new Schema ({
     usersScores: [
         {
             score: Number,
-            username: String
+            username: String,
+            createdAt: String
         }
     ],
     users: [
         {
             username: String,
-            password: String,
             createdAt: String
         }
     ]

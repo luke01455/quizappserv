@@ -1,5 +1,6 @@
 const usersResolvers = require('./users')
 const quizResolvers = require('./quizzes')
+const scoreResolvers = require('./quizScore')
 
 module.exports = {
     Quiz: {
@@ -13,6 +14,7 @@ module.exports = {
     },
     Mutation: {
         ...usersResolvers.Mutation,
-        ...quizResolvers.Mutation
+        ...quizResolvers.Mutation,
+        ...scoreResolvers.Mutation
     }
 }
