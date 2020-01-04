@@ -14,14 +14,14 @@ module.exports = {
         }
     },
     Mutation: {
-        async createQuiz(parent, { maxUsers }, ctx, info){
+        async createQuiz(parent, { maxUsers, type }, ctx, info){
             const newQuiz = new Quiz({
                 maxUsers,
+                type,
                 createdAt: new Date().toISOString()
             })
 
             const quiz = await newQuiz.save();
-
             return quiz;
         },
     }

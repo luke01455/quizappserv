@@ -5,7 +5,7 @@ const scoreResolvers = require('./quizScore')
 module.exports = {
     Quiz: {
         userCount(parent, args, ctx, info){
-            return parent.users.length
+            return parent.usersScores.length
         }
     },
     Query: {

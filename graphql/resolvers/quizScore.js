@@ -6,15 +6,16 @@ module.exports = {
     Mutation: {
         async createScore(parent, { quizId, score }, ctx, info){
             //authorization
-            const { username } = checkAuth(ctx)
+            const user = checkAuth(ctx)
 
             const quiz = await Quiz.findById(quizId)
 
             if(quiz){
                 quiz.usersScores.unshift({
                     score,
-                    username,
-                    createdAt: new Date().toISOString()
+                    username: user.username,
+                    createdAt: new Date().toISOString(),
+                    userId: user.id
                 })
                 await quiz.save()
                 return quiz

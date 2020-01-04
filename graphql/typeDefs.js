@@ -16,7 +16,7 @@ module.exports = gql`
     }
     type Quiz {
         id: ID!
-        users: [User]
+        type: String!
         maxUsers: Int!
         createdAt: String!
         usersScores: [UserScore]
@@ -28,6 +28,7 @@ module.exports = gql`
         score: Int!
         quiz: String!
         createdAt: String!
+        userId: String!
     }
     type Query {
         getUsers: [User]!
@@ -36,7 +37,7 @@ module.exports = gql`
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
-        createQuiz(maxUsers: Int!): Quiz!
+        createQuiz(maxUsers: Int!, type: String!): Quiz!
         createScore(quizId: String!, score: Int!): Quiz!
     }
 `
