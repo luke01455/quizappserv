@@ -20,6 +20,22 @@ module.exports = {
                 await quiz.save()
                 return quiz
             } else throw new UserInputError('Quiz not found')
+        },
+        async updateScore(parent, { quizId, scoreId, score}, ctx, info){
+            const user = checkAuth(ctx)
+
+            const quiz = await Quiz.findById(quizId)
+
+            if(quiz){
+                const userScore = quiz.usersScores.find(el => el.id = scoreId)
+
+                if(userScore) {
+                    userScore.score = score
+                    await quiz.save()
+                    return quiz
+                }
+
+            }
         }
     }
 }  

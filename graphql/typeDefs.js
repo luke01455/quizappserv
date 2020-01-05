@@ -21,6 +21,7 @@ module.exports = gql`
         createdAt: String!
         usersScores: [UserScore]
         userCount: Int!
+        isActive: Boolean!
     }
     type UserScore {
         id: ID!
@@ -39,5 +40,6 @@ module.exports = gql`
         login(username: String!, password: String!): User!
         createQuiz(maxUsers: Int!, type: String!): Quiz!
         createScore(quizId: String!, score: Int!): Quiz!
+        updateScore(quizId: String!, scoreId: String!, score: Int!): Quiz!
     }
 `

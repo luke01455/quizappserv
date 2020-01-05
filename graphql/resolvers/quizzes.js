@@ -1,6 +1,4 @@
-const { AuthenticationError } = require('apollo-server')
 const Quiz = require('../../models/Quiz')
-const checkAuth = require('../../utils/checkAuth')
 
 module.exports = {
     Query: {
@@ -18,6 +16,7 @@ module.exports = {
             const newQuiz = new Quiz({
                 maxUsers,
                 type,
+                isActive: true,
                 createdAt: new Date().toISOString()
             })
 
