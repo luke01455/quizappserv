@@ -1,4 +1,6 @@
 const Quiz = require('../../models/Quiz')
+const { UserInputError } = require('apollo-server')
+const checkAuth = require('../../utils/checkAuth')
 
 module.exports = {
     Query: {
@@ -23,5 +25,32 @@ module.exports = {
             const quiz = await newQuiz.save();
             return quiz;
         },
+        async endQuiz(parent, { quizId }, ctx, info){
+            const user = checkAuth(ctx)
+
+            const quiz = await Quiz.findById(quizId)
+
+            if (!quiz) {
+                throw new UserInputError('Quiz not found', {
+                    error: {
+                        quiz: 'quiz doesnt exist'
+                    }
+                })
+            }
+            if (!user) {
+                throw new UserInputError('Please log in', {
+                    error: {
+                        user: 'user not logged in'
+                    }
+                })
+            }
+
+            if(quiz && user){
+                quiz.isActive = false;
+                await quiz.save()
+                return quiz
+            }
+
+        }
     }
 }  
