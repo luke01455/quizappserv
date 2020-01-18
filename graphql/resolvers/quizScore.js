@@ -29,8 +29,14 @@ module.exports = {
             if(quiz){
                 const userScore = quiz.usersScores.find(el => el.id = scoreId)
 
+
                 if(userScore) {
                     userScore.score = score
+                    if(quiz.userCount === quiz.maxUsers) {
+                        quiz.isActive = false
+                        await quiz.save()
+                        return quiz
+                    }
                     await quiz.save()
                     return quiz
                 }
