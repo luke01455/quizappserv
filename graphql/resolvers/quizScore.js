@@ -17,6 +17,12 @@ module.exports = {
                     createdAt: new Date().toISOString(),
                     userId: user.id
                 })
+                if(quiz.usersScores.length >= quiz.maxUsers) {
+                    quiz.isActive = false
+                    await quiz.save()
+                    return quiz
+                }
+
                 await quiz.save()
                 return quiz
             } else throw new UserInputError('Quiz not found')
@@ -32,11 +38,6 @@ module.exports = {
 
                 if(userScore) {
                     userScore.score = score
-                    if(quiz.userCount === quiz.maxUsers) {
-                        quiz.isActive = false
-                        await quiz.save()
-                        return quiz
-                    }
                     await quiz.save()
                     return quiz
                 }
