@@ -34,6 +34,7 @@ module.exports = gql`
     type Query {
         getUsers: [User]!
         getQuiz: [Quiz]!
+        getThisQuiz(quizId: String!): [Quiz]!
     }
     type Mutation {
         register(registerInput: RegisterInput): User!

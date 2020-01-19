@@ -11,6 +11,21 @@ module.exports = {
             } catch(err) {
                 throw new Error(err)
             }
+        },
+        async getThisQuiz(parent, { quizId }, ctx, info){
+            const quiz = await Quiz.findById(quizId)
+
+            if (!quiz) {
+                throw new UserInputError('Quiz not found', {
+                    error: {
+                        quiz: 'quiz doesnt exist'
+                    }
+                })
+            }
+            if(quiz){
+                return quiz
+            }
+
         }
     },
     Mutation: {
