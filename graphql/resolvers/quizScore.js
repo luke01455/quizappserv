@@ -18,10 +18,20 @@ module.exports = {
                     userId: user.id
                 })
                 if(quiz.usersScores.length >= quiz.maxUsers) {
+                    const newQuiz = new Quiz({
+                        maxUsers: quiz.maxUsers,
+                        type: quiz.type,
+                        isActive: true,
+                        createdAt: new Date().toISOString()
+                    }) 
+                    await newQuiz.save();
+                }
+                if(quiz.usersScores.length >= quiz.maxUsers) {
                     quiz.isActive = false
                     await quiz.save()
                     return quiz
                 }
+
 
                 await quiz.save()
                 return quiz
