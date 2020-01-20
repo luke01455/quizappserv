@@ -30,6 +30,8 @@ module.exports = gql`
         quiz: String!
         createdAt: String!
         userId: String!
+        ticketsLow: Int!
+        ticketsHigh: Int!
     }
     type Query {
         getUsers: [User]!
