@@ -10,7 +10,9 @@ const quizSchema = new Schema ({
             score: Number,
             username: String,
             createdAt: String,
-            userId: String
+            userId: String,
+            ticketsLow: Number,
+            ticketsHigh: Number
         }
     ]
 })

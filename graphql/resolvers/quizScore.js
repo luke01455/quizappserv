@@ -15,7 +15,9 @@ module.exports = {
                     score,
                     username: user.username,
                     createdAt: new Date().toISOString(),
-                    userId: user.id
+                    userId: user.id,
+                    ticketsLow: quiz.usersScores.length * 5 + 1,
+                    ticketsHigh: quiz.usersScores.length * 5 + 1,
                 })
                 if(quiz.usersScores.length >= quiz.maxUsers) {
                     const newQuiz = new Quiz({
@@ -48,6 +50,7 @@ module.exports = {
 
                 if(userScore) {
                     userScore.score = score
+                    userScore.ticketsHigh = userScore.ticketsLow + score
                     await quiz.save()
                     return quiz
                 }
