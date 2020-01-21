@@ -66,6 +66,15 @@ module.exports = {
                 return quiz
             }
 
+        },
+        async drawWinner(parent, args, ctx, info){
+            try{
+            const quizzes = await Quiz.find()
+            const quizzesinActive = quizzes.filter(quiz => quiz.isActive === false)
+            return quizzesinActive;
+        } catch(err) {
+            throw new Error(err)
+        }
         }
     }
 }  
