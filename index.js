@@ -6,6 +6,9 @@ const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
 const { MONGODB } = require('./config.js')
 
+const cron = require("node-cron")
+let shell = require("shelljs")
+
 const pubsub = new PubSub()
 
 const PORT = process.env.PORT || 5000
@@ -14,6 +17,10 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: ({ req }) => ({ req, pubsub })
+})
+
+cron.schedule("* * * * * *", function(){
+    
 })
 
 mongoose.connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })

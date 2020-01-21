@@ -16,8 +16,8 @@ module.exports = {
                     username: user.username,
                     createdAt: new Date().toISOString(),
                     userId: user.id,
-                    ticketsLow: quiz.usersScores.length * 5 + 1,
-                    ticketsHigh: quiz.usersScores.length * 5 + 1,
+                    ticketsLow: quiz.usersScores.length * 6 + 1,
+                    ticketsHigh: quiz.usersScores.length * 6 + 1,
                 })
                 if(quiz.usersScores.length >= quiz.maxUsers) {
                     const newQuiz = new Quiz({
