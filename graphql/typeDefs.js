@@ -21,7 +21,8 @@ module.exports = gql`
         createdAt: String!
         usersScores: [UserScore]
         userCount: Int!
-        isActive: Boolean!
+        isActive: String!
+        winner: String!
     }
     type UserScore {
         id: ID!

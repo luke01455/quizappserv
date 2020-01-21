@@ -4,7 +4,8 @@ const quizSchema = new Schema ({
     maxUsers: Number,
     createdAt: String,
     type: String,
-    isActive: Boolean,
+    isActive: String,
+    winner: String,
     usersScores: [
         {
             score: Number,

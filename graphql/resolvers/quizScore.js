@@ -29,7 +29,7 @@ module.exports = {
                     await newQuiz.save();
                 }
                 if(quiz.usersScores.length >= quiz.maxUsers) {
-                    quiz.isActive = false
+                    quiz.isActive = 'filled'
                     await quiz.save()
                     return quiz
                 }
