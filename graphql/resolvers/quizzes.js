@@ -1,6 +1,8 @@
 const Quiz = require('../../models/Quiz')
 const { UserInputError } = require('apollo-server')
 const checkAuth = require('../../utils/checkAuth')
+let moment = require('moment');
+var now = moment();
 
 module.exports = {
     Query: {
@@ -70,8 +72,9 @@ module.exports = {
         async drawWinner(parent, args, ctx, info){
             try{
             const quizzes = await Quiz.find()
-            const quizzesinActive = quizzes.filter(quiz => quiz.isActive === false)
-            return quizzesinActive;
+            const quizzesInActive = quizzes.filter(quiz => quiz.isActive === false)
+            const quizIsReady = quizzesInActive.filter(quiz => moment(quiz.usersScores[0].createdAt).add(30, 'minutes') < now)
+            return quizIsReady;
         } catch(err) {
             throw new Error(err)
         }
