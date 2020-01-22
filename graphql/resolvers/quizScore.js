@@ -23,7 +23,7 @@ module.exports = {
                     const newQuiz = new Quiz({
                         maxUsers: quiz.maxUsers,
                         type: quiz.type,
-                        isActive: true,
+                        isActive: 'filling',
                         createdAt: new Date().toISOString()
                     }) 
                     await newQuiz.save();

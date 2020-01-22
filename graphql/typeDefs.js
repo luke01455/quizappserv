@@ -47,6 +47,6 @@ module.exports = gql`
         createScore(quizId: String!, score: Int!): Quiz!
         updateScore(quizId: String!, scoreId: String!, score: Int!): Quiz!
         endQuiz(quizId: String!): Quiz!
-        drawWinner: [Quiz]!
+        drawWinner: Quiz!
     }
 `

@@ -46,15 +46,20 @@ module.exports = {
         async drawWinner(parent, args, ctx, info){
             try{
             const quizzes = await Quiz.find()
-            const quizzesInActive = quizzes.filter(quiz => quiz.isActive === false)
-            const quizIsReady = quizzesInActive.filter(quiz => moment(quiz.usersScores[0].createdAt).add(1, 'second') < now)
-            quizzesInActive.forEach(function(quiz){
-                if(quiz.winner === 'undrawn') {
-                    quiz.winner = 'drawn'
-                    quiz.isActive = 'complete'
+            const quizzesInActive = quizzes.filter(quiz => quiz.isActive === 'filled')
+            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(30, 'minutes') < now)
+            if(quizIsReady){
+                if(quizIsReady.winner === 'undrawn') {
+                    quizIsReady.winner = 'drawn'
+                    quizIsReady.isActive = 'complete'
+                    await quizIsReady.save()
+                    return quizIsReady
                 }
-            })
-            return quizIsReady;
+                await quizIsReady.save()
+                return quizIsReady
+            }
+            return quizIsReady
+            
         } catch(err) {
             throw new Error(err)
         }
