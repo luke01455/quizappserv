@@ -47,10 +47,13 @@ module.exports = {
             try{
             const quizzes = await Quiz.find()
             const quizzesInActive = quizzes.filter(quiz => quiz.isActive === 'filled')
-            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(30, 'minutes') < now)
+            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(1, 'second') < now)
             if(quizIsReady){
                 if(quizIsReady.winner === 'undrawn') {
-                    quizIsReady.winner = 'drawn'
+                    const highTicket = quizIsReady.usersScores[0].ticketsHigh
+                    const winningTicket = Math.floor(Math.random() * highTicket + 1)
+                    const winningUser = Math.floor(winningTicket / 6)
+                    quizIsReady.winner = quizIsReady.usersScores[winningUser].username
                     quizIsReady.isActive = 'complete'
                     await quizIsReady.save()
                     return quizIsReady

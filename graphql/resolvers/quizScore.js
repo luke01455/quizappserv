@@ -24,6 +24,7 @@ module.exports = {
                         maxUsers: quiz.maxUsers,
                         type: quiz.type,
                         isActive: 'filling',
+                        winner: 'undrawn',
                         createdAt: new Date().toISOString()
                     }) 
                     await newQuiz.save();
