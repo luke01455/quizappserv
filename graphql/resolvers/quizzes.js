@@ -56,18 +56,17 @@ module.exports = {
                     
 
                     const drawUser = () => {
-                        const winningTicket = Math.floor(Math.random() * highTicket + 1)
-                        const winningSlot = Math.floor(winningTicket / 6)
-                        const winningUser = quizIsReady.usersScores.length - winningSlot
-                        console.log(winningSlot, "slot")
-                        console.log(winningTicket, "ticket")
-                        console.log(winningUser, "user")
-                        if(quizIsReady.usersScores[winningUser].ticketsHigh >= winningTicket 
+                        const winningTicket = Math.floor(Math.random() * highTicket) + 1
+                        const winningUser = Math.floor(winningTicket / 6)
+                        const reversedArray = quizIsReady.usersScores.reverse()
+                        
+                        
+                        if(reversedArray[winningUser].ticketsHigh >= winningTicket 
                             && 
-                            quizIsReady.usersScores[winningUser].ticketsLow <= winningTicket) {
-                                return quizIsReady.usersScores[winningUser].username
+                            reversedArray[winningUser].ticketsLow <= winningTicket) {
+                                return reversedArray[winningUser].username
                             } else {
-                                //drawUser()
+                                drawUser()
                             }
                     }
 
