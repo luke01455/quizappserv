@@ -8,9 +8,10 @@ module.exports = {
         async createScore(parent, { quizId, score }, ctx, info){
             //authorization
             const user = checkAuth(ctx)
+            const thisUser = await User.findById(user.id)
 
             const quiz = await Quiz.findById(quizId)
-            const thisUser = await User.findById(user.id)
+            
 
             if(quiz){
                 quiz.usersScores.unshift({
@@ -20,6 +21,7 @@ module.exports = {
                     userId: user.id,
                     ticketsLow: quiz.usersScores.length * 6 + 1,
                     ticketsHigh: quiz.usersScores.length * 6 + 1,
+                    quiz: quizId
                 })
                 thisUser.usersScores.unshift({
                     score,
@@ -28,6 +30,7 @@ module.exports = {
                     userId: user.id,
                     ticketsLow: quiz.usersScores.length * 6 + 1,
                     ticketsHigh: quiz.usersScores.length * 6 + 1,
+                    quiz: quizId
                 })
                 await thisUser.save()
 
@@ -54,12 +57,17 @@ module.exports = {
         },
         async updateScore(parent, { quizId, scoreId, score}, ctx, info){
             const user = checkAuth(ctx)
+            const thisUser = await User.findById(user.id)
 
             const quiz = await Quiz.findById(quizId)
 
             if(quiz){
                 const userScore = quiz.usersScores.find(el => el.id = scoreId)
 
+                // find latest userscore by user and update it
+                thisUser.usersScores[0].score = score
+                thisUser.usersScores[0].score = thisUser.usersScores[0].ticketsLow + score
+                await thisUser.save()
 
                 if(userScore) {
                     userScore.score = score

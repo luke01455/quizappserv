@@ -12,7 +12,8 @@ const userSchema = new Schema ({
             createdAt: String,
             userId: String,
             ticketsLow: Number,
-            ticketsHigh: Number
+            ticketsHigh: Number,
+            quizId: String
         }
     ]
 })
