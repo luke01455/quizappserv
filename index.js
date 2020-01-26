@@ -19,11 +19,11 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req, pubsub })
 });
 
-cron.schedule("2 * * * * *", function() {
-    if(shell.exec("node drawWinner.js").code !== 0){
-        console.log("something went wrong")
-    }
-});
+// cron.schedule("2 * * * * *", function() {
+//     if(shell.exec("node drawWinner.js").code !== 0){
+//         console.log("something went wrong")
+//     }
+// });
 
 mongoose
   .connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })

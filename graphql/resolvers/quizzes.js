@@ -55,11 +55,13 @@ module.exports = {
                     
                     
 
-                    const drawUser = () => {
+                    const drawUser = async () => {
                         const winningTicket = Math.floor(Math.random() * highTicket) + 1
                         const winningUser = Math.floor(winningTicket / 6)
                         const reversedArray = quizIsReady.usersScores.reverse()
-                        
+                        console.log(winningTicket, "winning ticket")
+                        console.log(winningUser, "winning user")
+                        console.log(reversedArray, "array")
                         
                         if(reversedArray[winningUser].ticketsHigh >= winningTicket 
                             && 
@@ -70,8 +72,9 @@ module.exports = {
                             }
                     }
 
-                    const winner = drawUser()
+                    const winner = await drawUser()
                     if(winner) {
+                        console.log('got here')
                         quizIsReady.winner = winner
                         quizIsReady.isActive = 'complete'
                         await quizIsReady.save()

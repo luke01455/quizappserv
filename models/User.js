@@ -4,7 +4,17 @@ const userSchema = new Schema ({
     username: String,
     password: String,
     email: String,
-    createdAt: String
+    createdAt: String,
+    usersScores: [
+        {
+            score: Number,
+            username: String,
+            createdAt: String,
+            userId: String,
+            ticketsLow: Number,
+            ticketsHigh: Number
+        }
+    ]
 })
 
 module.exports = model('User', userSchema)

@@ -7,6 +7,7 @@ module.exports = gql`
         token: String!
         username: String!
         createdAt: String!
+        usersScores: [UserScore]
     }
     input RegisterInput {
         username: String!
@@ -38,7 +39,7 @@ module.exports = gql`
         getUsers: [User]!
         getQuiz: [Quiz]!
         getThisQuiz(quizId: String!): Quiz!
-        
+        getMyScores(userId: String!): [UserScore]
     }
     type Mutation {
         register(registerInput: RegisterInput): User!
@@ -47,6 +48,6 @@ module.exports = gql`
         createScore(quizId: String!, score: Int!): Quiz!
         updateScore(quizId: String!, scoreId: String!, score: Int!): Quiz!
         endQuiz(quizId: String!): Quiz!
-        drawWinner: Quiz!
+        drawWinner: Quiz
     }
 `
