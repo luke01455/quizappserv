@@ -39,7 +39,7 @@ module.exports = gql`
         getUsers: [User]!
         getQuiz: [Quiz]!
         getThisQuiz(quizId: String!): Quiz!
-        getMyScores(userId: String!): [UserScore]
+        getMyScores: [UserScore]
     }
     type Mutation {
         register(registerInput: RegisterInput): User!

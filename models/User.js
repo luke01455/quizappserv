@@ -13,7 +13,7 @@ const userSchema = new Schema ({
             userId: String,
             ticketsLow: Number,
             ticketsHigh: Number,
-            quizId: String
+            quiz: String
         }
     ]
 })

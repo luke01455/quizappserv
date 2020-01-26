@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { UserInputError } = require('apollo-server')
+const checkAuth = require('../../utils/checkAuth')
 
 const { validateRegisterInput, validateLoginInput } = require('../../utils/validators')
 const { SECRET_KEY } = require('../../config')
@@ -20,6 +21,19 @@ module.exports = {
             try{
                 const users = await User.find().sort({ createdAt: -1 });
                 return users;
+            } catch(err) {
+                throw new Error(err)
+            }
+        },
+        async getMyScores(parent, args, ctx, info){
+            
+            try{
+                const user = checkAuth(ctx)
+                if(user){
+                    const thisUser = await User.findById(user.id)
+                    return thisUser.usersScores
+                }
+                
             } catch(err) {
                 throw new Error(err)
             }
