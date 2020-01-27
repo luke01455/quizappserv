@@ -31,10 +31,11 @@ module.exports = {
         }
     },
     Mutation: {
-        async createQuiz(parent, { maxUsers, type }, ctx, info){
+        async createQuiz(parent, { maxUsers, quizType, price }, ctx, info){
             const newQuiz = new Quiz({
                 maxUsers,
-                type,
+                quizType,
+                price,
                 winner: 'undrawn',
                 isActive: 'filling',
                 createdAt: new Date().toISOString()

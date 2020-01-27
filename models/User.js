@@ -13,7 +13,9 @@ const userSchema = new Schema ({
             userId: String,
             ticketsLow: Number,
             ticketsHigh: Number,
-            quiz: String
+            quiz: String,
+            price: Number,
+            quizType: String
         }
     ]
 })

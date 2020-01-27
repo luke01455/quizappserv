@@ -21,7 +21,9 @@ module.exports = {
                     userId: user.id,
                     ticketsLow: quiz.usersScores.length * 6 + 1,
                     ticketsHigh: quiz.usersScores.length * 6 + 1,
-                    quiz: quizId
+                    quiz: quizId,
+                    price: quiz.price,
+                    quizType: quiz.quizType
                 })
                 quiz.usersScores.unshift({
                     score,
@@ -30,7 +32,9 @@ module.exports = {
                     userId: user.id,
                     ticketsLow: quiz.usersScores.length * 6 + 1,
                     ticketsHigh: quiz.usersScores.length * 6 + 1,
-                    quiz: quizId
+                    quiz: quizId,
+                    price: quiz.price,
+                    quizType: quiz.quizType
                 })
 
                 await thisUser.save()
@@ -38,7 +42,8 @@ module.exports = {
                 if(quiz.usersScores.length >= quiz.maxUsers) {
                     const newQuiz = new Quiz({
                         maxUsers: quiz.maxUsers,
-                        type: quiz.type,
+                        quizType: quiz.quizType,
+                        price: quiz.price,
                         isActive: 'filling',
                         winner: 'undrawn',
                         createdAt: new Date().toISOString()

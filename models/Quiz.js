@@ -3,9 +3,10 @@ const { model, Schema } = require('mongoose');
 const quizSchema = new Schema ({
     maxUsers: Number,
     createdAt: String,
-    type: String,
+    quizType: String,
     isActive: String,
     winner: String,
+    price: Number,
     usersScores: [
         {
             score: Number,
@@ -14,7 +15,9 @@ const quizSchema = new Schema ({
             userId: String,
             ticketsLow: Number,
             ticketsHigh: Number,
-            quiz: String
+            quiz: String,
+            price: Number,
+            quizType: String
         }
     ]
 })
