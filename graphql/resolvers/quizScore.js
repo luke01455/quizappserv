@@ -14,15 +14,6 @@ module.exports = {
             
 
             if(quiz){
-                quiz.usersScores.unshift({
-                    score,
-                    username: user.username,
-                    createdAt: new Date().toISOString(),
-                    userId: user.id,
-                    ticketsLow: quiz.usersScores.length * 6 + 1,
-                    ticketsHigh: quiz.usersScores.length * 6 + 1,
-                    quiz: quizId
-                })
                 thisUser.usersScores.unshift({
                     score,
                     username: user.username,
@@ -32,6 +23,16 @@ module.exports = {
                     ticketsHigh: quiz.usersScores.length * 6 + 1,
                     quiz: quizId
                 })
+                quiz.usersScores.unshift({
+                    score,
+                    username: user.username,
+                    createdAt: new Date().toISOString(),
+                    userId: user.id,
+                    ticketsLow: quiz.usersScores.length * 6 + 1,
+                    ticketsHigh: quiz.usersScores.length * 6 + 1,
+                    quiz: quizId
+                })
+
                 await thisUser.save()
 
                 if(quiz.usersScores.length >= quiz.maxUsers) {
@@ -66,7 +67,7 @@ module.exports = {
 
                 // find latest userscore by user and update it
                 thisUser.usersScores[0].score = score
-                thisUser.usersScores[0].score = thisUser.usersScores[0].ticketsLow + score
+                thisUser.usersScores[0].ticketsHigh = thisUser.usersScores[0].ticketsLow + score
                 await thisUser.save()
 
                 if(userScore) {
