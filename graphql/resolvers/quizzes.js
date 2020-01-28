@@ -45,11 +45,12 @@ module.exports = {
             return quiz;
         },
         async drawWinner(parent, args, ctx, info){
-
+            console.log('starting draw')
+            // console.log(Date.now())
             try{
             const quizzes = await Quiz.find()
             const quizzesInActive = quizzes.filter(quiz => quiz.isActive === 'filled')
-            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(1, 'second') < now)
+            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(15, 'minutes') < Date.now())
             if(quizIsReady){
                 if(quizIsReady.winner === 'undrawn') {
                     const highTicket = quizIsReady.usersScores[0].ticketsHigh
@@ -60,9 +61,9 @@ module.exports = {
                         const winningTicket = Math.floor(Math.random() * highTicket) + 1
                         const winningUser = Math.floor(winningTicket / 6)
                         const reversedArray = quizIsReady.usersScores.reverse()
-                        console.log(winningTicket, "winning ticket")
-                        console.log(winningUser, "winning user")
-                        console.log(reversedArray, "array")
+                        // console.log(winningTicket, "winning ticket")
+                        // console.log(winningUser, "winning user")
+                        // console.log(reversedArray, "array")
                         
                         if(reversedArray[winningUser].ticketsHigh >= winningTicket 
                             && 
@@ -74,15 +75,12 @@ module.exports = {
                     }
 
                     const winner = await drawUser()
-                    if(winner) {
                         console.log('got here')
+                        console.log('winner', winner)
                         quizIsReady.winner = winner
                         quizIsReady.isActive = 'complete'
                         await quizIsReady.save()
                         return quizIsReady
-                    }
-                    await quizIsReady.save()
-                    return quizIsReady
                 }
                 await quizIsReady.save()
                 return quizIsReady
