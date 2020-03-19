@@ -7,6 +7,7 @@ const quizSchema = new Schema ({
     isActive: String,
     winner: String,
     price: Number,
+    prize: String,
     usersScores: [
         {
             score: Number,

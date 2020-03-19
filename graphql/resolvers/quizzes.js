@@ -31,11 +31,12 @@ module.exports = {
         }
     },
     Mutation: {
-        async createQuiz(parent, { maxUsers, quizType, price }, ctx, info){
+        async createQuiz(parent, { maxUsers, quizType, price, prize }, ctx, info){
             const newQuiz = new Quiz({
                 maxUsers,
                 quizType,
                 price,
+                prize, 
                 winner: 'undrawn',
                 isActive: 'filling',
                 createdAt: new Date().toISOString()
@@ -50,7 +51,7 @@ module.exports = {
             try{
             const quizzes = await Quiz.find()
             const quizzesInActive = quizzes.filter(quiz => quiz.isActive === 'filled')
-            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(15, 'minutes') < Date.now())
+            const quizIsReady = quizzesInActive.find(quiz => moment(quiz.usersScores[0].createdAt).add(2, 'minutes') < Date.now())
             if(quizIsReady){
                 if(quizIsReady.winner === 'undrawn') {
                     const highTicket = quizIsReady.usersScores[0].ticketsHigh
