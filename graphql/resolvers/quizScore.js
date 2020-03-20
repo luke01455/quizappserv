@@ -44,6 +44,7 @@ module.exports = {
                         maxUsers: quiz.maxUsers,
                         quizType: quiz.quizType,
                         price: quiz.price,
+                        prize: quiz.prize,
                         isActive: 'filling',
                         winner: 'undrawn',
                         createdAt: new Date().toISOString()
