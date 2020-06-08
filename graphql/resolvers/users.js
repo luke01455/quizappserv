@@ -112,6 +112,18 @@ module.exports = {
                 id: res._id,
                 token
             }
-        }
+        },
+        // async addCoins(parent, { addCoins }, ctx, info) {
+
+        //     const user = checkAuth(ctx)
+        //     const thisUser = await User.findById(user.id)
+
+        //     if(thisUser){
+        //         thisUser.coins = thisUser.coins + addCoins
+        //     } else throw new UserInputError('Error adding coins to user')
+
+        //     await thisUser.save()
+
+        // },
     }
 }
