@@ -8,6 +8,7 @@ module.exports = gql`
         username: String!
         createdAt: String!
         usersScores: [UserScore]
+        coins: Int!
     }
     input RegisterInput {
         username: String!

@@ -99,6 +99,7 @@ module.exports = {
                 username,
                 password,
                 createdAt: new Date().toISOString(),
+                coins: 0,
                 usersScores: []
             })
         
