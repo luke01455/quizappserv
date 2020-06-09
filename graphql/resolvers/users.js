@@ -113,17 +113,29 @@ module.exports = {
                 token
             }
         },
-        // async addCoins(parent, { addCoins }, ctx, info) {
+        async addCoins(parent, { addCoins }, ctx, info) {
 
-        //     const user = checkAuth(ctx)
-        //     const thisUser = await User.findById(user.id)
+            const user = checkAuth(ctx)
+            const thisUser = await User.findById(user.id)
 
-        //     if(thisUser){
-        //         thisUser.coins = thisUser.coins + addCoins
-        //     } else throw new UserInputError('Error adding coins to user')
+            if(thisUser){
+                thisUser.coins = thisUser.coins + addCoins
+            } else throw new UserInputError('Error adding coins to user')
 
-        //     await thisUser.save()
+            await thisUser.save()
+            return thisUser
+        },
+        async removeCoins(parent, { removeCoins }, ctx, info) {
 
-        // },
+            const user = checkAuth(ctx)
+            const thisUser = await User.findById(user.id)
+
+            if(thisUser.coins >= removeCoins){
+                thisUser.coins = thisUser.coins - removeCoins
+            } else throw new UserInputError('not enough coins / other error removing coins')
+
+            await thisUser.save()
+            return thisUser
+        },
     }
 }
